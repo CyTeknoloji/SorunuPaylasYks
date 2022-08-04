@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profileSettingsFragment"
+        android:icon="@drawable/profilepicture"
+        android:title="Profil Ayarları" />
+    <item
+        android:id="@+id/sorularimFragment"
+        android:icon="@drawable/navsorularim"
+        android:title="Sorularım" />
+    <item
+        android:id="@+id/puanver"
+        android:icon="@drawable/rating"
+        android:title="Uygulamaya Puan Ver" />
+    <item
+        android:id="@+id/uygulamayipaylas"
+        android:icon="@drawable/share"
+        android:title="Uygulamayı Paylaş" />
+    <item
+        android:id="@+id/signout"
+        android:icon="@drawable/signout"
+        android:title="Çıkış" />
+</menu>

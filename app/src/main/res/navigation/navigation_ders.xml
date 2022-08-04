@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_ders"
+    app:startDestination="@id/dersFeedFragment">
+
+    <fragment
+        android:id="@+id/dersFeedFragment"
+        android:name="com.caneryildirim.sorunupaylasyks.view.DersFeedFragment"
+        android:label="fragment_ders_feed"
+        tools:layout="@layout/fragment_ders_feed" >
+        <action
+            android:id="@+id/action_dersFeedFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment" />
+        <action
+            android:id="@+id/action_dersFeedFragment_to_sorularimFragment"
+            app:destination="@id/sorularimFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.caneryildirim.sorunupaylasyks.view.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" >
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_dersFeedFragment"
+            app:destination="@id/dersFeedFragment" />
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_sorularimFragment"
+            app:destination="@id/sorularimFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sorularimFragment"
+        android:name="com.caneryildirim.sorunupaylasyks.view.SorularimFragment"
+        android:label="fragment_sorularim"
+        tools:layout="@layout/fragment_sorularim" >
+        <action
+            android:id="@+id/action_sorularimFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment" />
+        <action
+            android:id="@+id/action_sorularimFragment_to_dersFeedFragment"
+            app:destination="@id/dersFeedFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "249327647056",
+    "project_id": "fir-insta-f02c2",
+    "storage_bucket": "fir-insta-f02c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249327647056:android:f01be70f6bb83ee657d455",
+        "android_client_info": {
+          "package_name": "com.caneryildirim.sorunupaylasyks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249327647056-fm72k2vo0iakgvup6eg5029jmp7fteua.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caneryildirim.sorunupaylasyks",
+            "certificate_hash": "7bea9ae3fdfc1a9dbac19a21d71360f2e6e2e1dc"
+          }
+        },
+        {
+          "client_id": "249327647056-7opfpjgj3k5mt2v2uaqck7q3tvvhos8u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpC0G0lxJbxj4EDwiCiIQRnCS7d5LVxss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249327647056-7opfpjgj3k5mt2v2uaqck7q3tvvhos8u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
