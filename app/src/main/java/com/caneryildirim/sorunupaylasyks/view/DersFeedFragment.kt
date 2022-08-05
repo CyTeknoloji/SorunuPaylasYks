@@ -5,21 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.caneryildirim.sorunupaylasyks.R
+import com.caneryildirim.sorunupaylasyks.adapter.RecyclerDersAdapter
+import com.caneryildirim.sorunupaylasyks.databinding.FragmentDersFeedBinding
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentGirisBinding
+import com.caneryildirim.sorunupaylasyks.util.Ders
 import com.caneryildirim.sorunupaylasyks.viewModel.DersFeedViewModel
 
 
 class DersFeedFragment : Fragment() {
-    private var _binding: FragmentGirisBinding?=null
+    private var _binding: FragmentDersFeedBinding?=null
     private val binding get() = _binding!!
 
     private lateinit var viewModel:DersFeedViewModel
+    private var adapterDers:RecyclerDersAdapter?=null
+    private var dersList:ArrayList<Ders>?= arrayListOf()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding= FragmentGirisBinding.inflate(inflater,container,false)
+        _binding= FragmentDersFeedBinding.inflate(inflater,container,false)
         val view=binding.root
         return view
     }
@@ -32,11 +39,22 @@ class DersFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(DersFeedViewModel::class.java)
+        viewModel.dersler()
         observerLiveData()
+
+        binding.recyclerDers.layoutManager=LinearLayoutManager(this.requireContext())
+
+
+
+
     }
 
     private fun observerLiveData() {
-
+        viewModel.dersListLive.observe(viewLifecycleOwner, Observer {
+            dersList?.addAll(it)
+            adapterDers= RecyclerDersAdapter(dersList!!)
+            binding.recyclerDers.adapter=adapterDers
+        })
     }
 
 

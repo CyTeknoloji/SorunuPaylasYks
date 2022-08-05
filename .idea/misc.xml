@@ -4,19 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/edittext_background.xml" value="0.1" />
+        <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/navsorularim.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/profilepicture.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/rating.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/share.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/signout.xml" value="0.1" />
+        <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/usernullprofileimage.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_ders.xml" value="0.25" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_sing.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_splash.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_test1.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/ders_row.xml" value="0.33" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_ders_feed.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_giris.xml" value="0.21" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_kayit.xml" value="0.17346014492753623" />
+        <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_profile_settings.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_sorularim.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/navigation_baslik.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/menu/navigationdrawer_menu.xml" value="0.20416666666666666" />
       </map>
     </option>

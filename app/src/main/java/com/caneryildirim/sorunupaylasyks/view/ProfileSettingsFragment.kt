@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentGirisBinding
+import com.caneryildirim.sorunupaylasyks.databinding.FragmentProfileSettingsBinding
 import com.caneryildirim.sorunupaylasyks.viewModel.ProfileSettingsViewModel
 
 
 class ProfileSettingsFragment : Fragment() {
-    private var _binding: FragmentGirisBinding?=null
+    private var _binding: FragmentProfileSettingsBinding?=null
     private val binding get() = _binding!!
 
     private lateinit var viewModel:ProfileSettingsViewModel
@@ -20,7 +21,7 @@ class ProfileSettingsFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding= FragmentGirisBinding.inflate(inflater,container,false)
+        _binding= FragmentProfileSettingsBinding.inflate(inflater,container,false)
         val view=binding.root
         return view
     }

@@ -48,10 +48,10 @@ dependencies {
 
     //Google Ads ve Google Signin
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
+    implementation 'com.google.android.gms:play-services-ads:21.1.0'
 
     //Navigation
-    def nav_version = "2.5.0"
+    def nav_version = "2.5.1"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
@@ -69,6 +69,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    //Image Dependency
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.squareup.picasso:picasso:2.8'
 
 
 

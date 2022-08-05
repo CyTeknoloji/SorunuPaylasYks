@@ -21,24 +21,10 @@
         android:id="@+id/profileSettingsFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.ProfileSettingsFragment"
         android:label="fragment_profile_settings"
-        tools:layout="@layout/fragment_profile_settings" >
-        <action
-            android:id="@+id/action_profileSettingsFragment_to_dersFeedFragment"
-            app:destination="@id/dersFeedFragment" />
-        <action
-            android:id="@+id/action_profileSettingsFragment_to_sorularimFragment"
-            app:destination="@id/sorularimFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile_settings" />
     <fragment
         android:id="@+id/sorularimFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.SorularimFragment"
         android:label="fragment_sorularim"
-        tools:layout="@layout/fragment_sorularim" >
-        <action
-            android:id="@+id/action_sorularimFragment_to_profileSettingsFragment"
-            app:destination="@id/profileSettingsFragment" />
-        <action
-            android:id="@+id/action_sorularimFragment_to_dersFeedFragment"
-            app:destination="@id/dersFeedFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_sorularim" />
 </navigation>
