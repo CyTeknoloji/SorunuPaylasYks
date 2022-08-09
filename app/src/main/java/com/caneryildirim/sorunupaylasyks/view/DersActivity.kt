@@ -49,6 +49,11 @@ class DersActivity : AppCompatActivity() {
 
     }
 
+    fun selectToolbarTitle(title:String){
+        binding.toolbarDersActivity.title=title
+    }
+
+
 
 
     private fun uiSettings() {
@@ -122,6 +127,7 @@ class DersActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
+        binding.toolbarDersActivity.title="SORUNU PAYLAŞ"
         if (binding.navigationDersDrawer.isDrawerOpen(GravityCompat.START)){
             binding.navigationDersDrawer.closeDrawer(GravityCompat.START)
         }else{

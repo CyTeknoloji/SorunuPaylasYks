@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_dersFeedFragment_to_sorularimFragment"
             app:destination="@id/sorularimFragment" />
+        <action
+            android:id="@+id/action_dersFeedFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileSettingsFragment"
@@ -27,4 +30,13 @@
         android:name="com.caneryildirim.sorunupaylasyks.view.SorularimFragment"
         android:label="fragment_sorularim"
         tools:layout="@layout/fragment_sorularim" />
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.caneryildirim.sorunupaylasyks.view.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" >
+        <argument
+            android:name="dersName"
+            app:argType="string" />
+    </fragment>
 </navigation>

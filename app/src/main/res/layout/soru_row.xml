@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardOdev"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dersOdevText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Ders"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tarihOdevText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/konuOdevText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Konu"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dersOdevText" />
+
+            <TextView
+                android:id="@+id/tarihOdevText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="3dp"
+                android:text="Süre"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/menuRecycler"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.caneryildirim.sorunupaylasyks.util.DynamicImageView
+                android:id="@+id/odevFeedImageview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/userProfileOdevImageview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/konuOdevText"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/whiteimage" />
+
+            <TextView
+                android:id="@+id/userNameOdevText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Kullanici"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userProfileOdevImageview"
+                app:layout_constraintEnd_toStartOf="@+id/textViewOdevCozum"
+                app:layout_constraintStart_toEndOf="@+id/userProfileOdevImageview"
+                app:layout_constraintTop_toTopOf="@+id/userProfileOdevImageview" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userProfileOdevImageview"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/personfeed" />
+
+            <ImageView
+                android:id="@+id/menuRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/noktauc" />
+
+            <ImageView
+                android:id="@+id/detailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/userNameOdevText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/userNameOdevText"
+                app:srcCompat="@drawable/detail_button3" />
+
+            <TextView
+                android:id="@+id/textViewOdevCozum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="Çözüldü"
+                android:textColor="@color/purple_500"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailButton"
+                app:layout_constraintEnd_toStartOf="@+id/detailButton"
+                app:layout_constraintTop_toTopOf="@+id/detailButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
