@@ -75,6 +75,18 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.picasso:picasso:2.8'
 
+    //imageCropper
+    implementation "androidx.activity:activity-ktx:1.6.0-alpha05"
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    //AvatarImageGenerator
+    implementation 'com.github.amoskorir:avatarimagegenerator:1.4'
+
+    //implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+    //implementation 'io.github.informramiz:nameinitialscircleimageview:1.6'
+
+
 
 
 

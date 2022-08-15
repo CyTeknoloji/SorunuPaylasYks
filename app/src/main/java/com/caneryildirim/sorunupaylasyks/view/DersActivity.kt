@@ -7,10 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
+import androidx.core.view.get
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.caneryildirim.sorunupaylasyks.R
@@ -90,8 +95,7 @@ class DersActivity : AppCompatActivity() {
         binding.navigationViewDers.setNavigationItemSelectedListener {
             if (it.itemId == R.id.puanver) {
                 val packageName = "com.caneryildirim.sorunupaylasyks"
-                val intent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${packageName}"))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${packageName}"))
                 startActivity(intent)
             }else if (it.itemId==R.id.uygulamayipaylas){
                 val shareBody="Sorunu Paylaş uygulamasını Play Store'dan yükle : https://play.google.com/store/apps/details?id=com.caneryildirim.sorunupaylasyks"
@@ -110,10 +114,10 @@ class DersActivity : AppCompatActivity() {
 
             }else if (it.itemId==R.id.profileSettingsFragment){
                 val action=DersFeedFragmentDirections.actionDersFeedFragmentToProfileSettingsFragment()
-                Navigation.findNavController(it.actionView).navigate(action)       //actionview null dönderiyor
+                Navigation.findNavController(navHostFragment.requireView()).navigate(action)       //actionview null dönderiyor
             }else if (it.itemId==R.id.sorularimFragment){
                 val action=DersFeedFragmentDirections.actionDersFeedFragmentToSorularimFragment()
-                Navigation.findNavController(it.actionView).navigate(action)
+                Navigation.findNavController(navHostFragment.requireView()).navigate(action)
             }
 
             true

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.adapter.RecyclerDersAdapter
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentDersFeedBinding
@@ -40,20 +41,38 @@ class DersFeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(DersFeedViewModel::class.java)
         viewModel.dersler()
-        observerLiveData()
+
 
         binding.recyclerDers.layoutManager=LinearLayoutManager(this.requireContext())
+        adapterDers= RecyclerDersAdapter(dersList!!)
+        binding.recyclerDers.adapter=adapterDers
 
+        observerLiveData()
 
+        binding.recyclerDers.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy>0){
+                    binding.fabDers.hide()
+                }else{
+                    binding.fabDers.show()
+                }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
 
+        binding.fabDers.setOnClickListener {
+
+        }
 
     }
 
     private fun observerLiveData() {
         viewModel.dersListLive.observe(viewLifecycleOwner, Observer {
-            dersList?.addAll(it)
-            adapterDers= RecyclerDersAdapter(dersList!!)
-            binding.recyclerDers.adapter=adapterDers
+            it?.let {
+                adapterDers?.addDersList(it)
+            }
+
+
         })
     }
 

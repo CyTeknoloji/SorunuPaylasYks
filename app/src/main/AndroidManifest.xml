@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SorunuPaylasYks"
         tools:targetApi="31">
-
+        <activity
+            android:name=".view.UpdateActivity"
+            android:exported="false" />
         <activity
             android:name=".view.DersActivity"
             android:exported="false" />

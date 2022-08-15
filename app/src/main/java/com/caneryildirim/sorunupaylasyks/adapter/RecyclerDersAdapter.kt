@@ -31,4 +31,10 @@ class RecyclerDersAdapter(val dersList:ArrayList<Ders>):RecyclerView.Adapter<Rec
     override fun getItemCount(): Int {
         return dersList.size
     }
+
+    fun addDersList(dersListNew:List<Ders>){
+        dersList.clear()
+        dersList.addAll(dersListNew)
+        notifyDataSetChanged()
+    }
 }

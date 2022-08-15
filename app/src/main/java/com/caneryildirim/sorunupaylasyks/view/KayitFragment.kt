@@ -91,6 +91,7 @@ class KayitFragment : Fragment() {
             }else{
                 viewModel.kayitOl(this.requireContext(),it,userEmail,userPassword,userDisplayName)
             }
+
         }
 
         binding.kayitGoogle.setOnClickListener {
@@ -124,6 +125,7 @@ class KayitFragment : Fragment() {
     private fun registerLauncher(){
         activityResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
             if (result.resultCode== RESULT_OK){
+
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     try {
                         // Google Sign In was successful, authenticate with Firebase
@@ -133,7 +135,7 @@ class KayitFragment : Fragment() {
 
                     } catch (e: ApiException) {
                         // Google Sign In failed, update UI appropriately
-                        Log.w(KayitViewModel.TAG, "Google sign in failed", e)
+                        println("Google sign is failed")
 
                     }
 
