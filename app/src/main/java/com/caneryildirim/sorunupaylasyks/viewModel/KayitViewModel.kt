@@ -1,33 +1,22 @@
 package com.caneryildirim.sorunupaylasyks.viewModel
 
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.provider.Settings.Global.getString
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.avatarfirst.avatargenlib.AvatarConstants
 import com.avatarfirst.avatargenlib.AvatarGenerator
-import com.caneryildirim.sorunupaylasyks.R
-import com.caneryildirim.sorunupaylasyks.view.DersActivity
 import com.caneryildirim.sorunupaylasyks.view.KayitFragmentDirections
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.caneryildirim.sorunupaylasyks.view.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -45,6 +34,7 @@ class KayitViewModel:ViewModel() {
     val userNames=MutableLiveData<List<String>>()
     val userNameList=ArrayList<String>()
     var userUidList=ArrayList<String>()
+    var errorInternet=MutableLiveData<Boolean>(false)
 
 
     private lateinit var googleSignInClient:GoogleSignInClient
@@ -77,7 +67,6 @@ class KayitViewModel:ViewModel() {
     }
 
     fun firebaseAuthWithGoogle(idToken: String,context: Context,activity: Activity) {
-        val auth= Firebase.auth
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
@@ -85,14 +74,17 @@ class KayitViewModel:ViewModel() {
                 updateUI(user,context,activity)
             }.addOnFailureListener {
                 updateUI(null,context,activity)
-                Toast.makeText(context,it.localizedMessage, Toast.LENGTH_LONG).show()
+                println(it.localizedMessage)
             }
+
+
     }
 
 
 
     fun getDataUsername(){
         db.collection("Usernames").get().addOnSuccessListener {
+            errorInternet.value=false
             if (it!=null){
                 if (!it.isEmpty){
                     val documents=it.documents
@@ -106,6 +98,8 @@ class KayitViewModel:ViewModel() {
                     userNames.value=userNameList
                 }
             }
+        }.addOnFailureListener {
+            println(it.localizedMessage)
         }
     }
 
@@ -204,7 +198,7 @@ class KayitViewModel:ViewModel() {
                             userNameData.put("userEmail",user.email!!)
                             userNameData.put("userPhotoUrl",user.photoUrl!!)
                             db.collection("Usernames").add(userNameData).addOnSuccessListener {
-                                val intent=Intent(context, DersActivity::class.java)
+                                val intent=Intent(context, MainActivity::class.java)
                                 activity.startActivity(intent)
                                 activity.finish()
 
@@ -220,7 +214,7 @@ class KayitViewModel:ViewModel() {
 
 
             }else{
-                val intent=Intent(context, DersActivity::class.java)
+                val intent=Intent(context, MainActivity::class.java)
                 activity.startActivity(intent)
                 activity.finish()
             }

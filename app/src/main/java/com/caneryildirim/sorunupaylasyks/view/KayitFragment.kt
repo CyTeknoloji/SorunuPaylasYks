@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -120,22 +121,34 @@ class KayitFragment : Fragment() {
             userNames?.addAll(it)
 
         })
+
+        viewModel.errorInternet.observe(viewLifecycleOwner, Observer {
+            if (it){
+                val alertDialog = AlertDialog.Builder(this.requireContext())
+                alertDialog.setTitle("Hata!")
+                alertDialog.setMessage("İnternet Bağlantınızı kontrol edin")
+                alertDialog.setPositiveButton("Tamam"){dialog,which->
+
+                }
+                alertDialog.show()
+            }
+
+        })
     }
 
     private fun registerLauncher(){
         activityResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
             if (result.resultCode== RESULT_OK){
-
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     try {
                         // Google Sign In was successful, authenticate with Firebase
                         val account = task.getResult(ApiException::class.java)!!
-                        Log.d(KayitViewModel.TAG, "firebaseAuthWithGoogle:" + account.id)
+                        //println("firebaseAuthWithGoogle:" + account.id)
                         viewModel.firebaseAuthWithGoogle(account.idToken!!,this.requireContext(),this.requireActivity())
 
                     } catch (e: ApiException) {
                         // Google Sign In failed, update UI appropriately
-                        println("Google sign is failed")
+                        println(e.localizedMessage)
 
                     }
 

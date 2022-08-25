@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
-import com.caneryildirim.sorunupaylasyks.view.DersActivity
 import com.caneryildirim.sorunupaylasyks.view.GirisFragmentDirections
+import com.caneryildirim.sorunupaylasyks.view.MainActivity
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -25,7 +25,7 @@ class GirisViewModel:ViewModel() {
     fun currentUser(context:Context){
         val currentUser=auth.currentUser
         if (currentUser!=null){
-            val intent= Intent(context, DersActivity::class.java)
+            val intent= Intent(context, MainActivity::class.java)
             context.startActivity(intent)
             finishActivity.value=true
         }
@@ -37,7 +37,7 @@ class GirisViewModel:ViewModel() {
             if (it.isSuccessful){
                 val user=auth.currentUser
                 if (user!!.isEmailVerified){
-                    val intent= Intent(context,DersActivity::class.java)
+                    val intent= Intent(context,MainActivity::class.java)
                     context.startActivity(intent)
                     loginLoading.value=false
                     finishActivity.value=true

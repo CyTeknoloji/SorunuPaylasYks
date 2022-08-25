@@ -42,6 +42,10 @@ class DersFeedFragment : Fragment() {
         viewModel=ViewModelProvider(this).get(DersFeedViewModel::class.java)
         viewModel.dersler()
 
+        //Toolbardaki İconların Görünürlük ayarı
+        //val activity=activity as MainActivity
+        //activity.toolbarIconVisibility(false,true,true)
+
 
         binding.recyclerDers.layoutManager=LinearLayoutManager(this.requireContext())
         adapterDers= RecyclerDersAdapter(dersList!!)
@@ -49,20 +53,7 @@ class DersFeedFragment : Fragment() {
 
         observerLiveData()
 
-        binding.recyclerDers.addOnScrollListener(object :RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy>0){
-                    binding.fabDers.hide()
-                }else{
-                    binding.fabDers.show()
-                }
-                super.onScrolled(recyclerView, dx, dy)
-            }
-        })
 
-        binding.fabDers.setOnClickListener {
-
-        }
 
     }
 

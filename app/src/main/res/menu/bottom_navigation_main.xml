@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dersFeedFragment"
+        android:icon="@drawable/homebutton"
+        android:title="Dersler" />
+    <item
+        android:id="@+id/feedFragment"
+        android:icon="@drawable/sorularnew2"
+        android:title="Anasayfa" />
+    <item
+        android:id="@+id/uploadFragment"
+        android:icon="@drawable/uploadnew"
+        android:title="Soru Yükle" />
+    <item
+        android:id="@+id/sorularimFragment"
+        android:icon="@drawable/sorularimnew"
+        android:title="Sorularım" />
+    <item
+        android:id="@+id/profileSettingsFragment"
+        android:icon="@drawable/personnew"
+        android:title="Profil" />
+</menu>

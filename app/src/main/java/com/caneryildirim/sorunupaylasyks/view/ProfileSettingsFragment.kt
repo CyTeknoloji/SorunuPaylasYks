@@ -35,6 +35,8 @@ class ProfileSettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(ProfileSettingsViewModel::class.java)
         observeLiveData()
+        //TODO("profili silerken database deki Usernames deki verileri de sil")
+        //TODO("ayrıca profil fotoğrafını da sil")
     }
 
     private fun observeLiveData() {

@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:249327647056:android:f01be70f6bb83ee657d455",
+        "mobilesdk_app_id": "1:249327647056:android:e7bc552d95e47cdb57d455",
         "android_client_info": {
           "package_name": "com.caneryildirim.sorunupaylasyks"
         }
       },
       "oauth_client": [
         {
-          "client_id": "249327647056-fm72k2vo0iakgvup6eg5029jmp7fteua.apps.googleusercontent.com",
+          "client_id": "249327647056-9ci5ru7la700b9k4ut034ms05at1ubkv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.caneryildirim.sorunupaylasyks",
-            "certificate_hash": "7bea9ae3fdfc1a9dbac19a21d71360f2e6e2e1dc"
+            "certificate_hash": "38098533be9fe56cf94ac74950ae92f69ef93e0a"
           }
         },
         {

@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/dersFeedFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.DersFeedFragment"
-        android:label="fragment_ders_feed"
-        tools:layout="@layout/fragment_ders_feed" >
+        android:label="SORUNU PAYLAŞ"
+        tools:layout="@layout/fragment_ders_feed">
         <action
             android:id="@+id/action_dersFeedFragment_to_profileSettingsFragment"
             app:destination="@id/profileSettingsFragment" />
@@ -18,25 +18,37 @@
             app:destination="@id/sorularimFragment" />
         <action
             android:id="@+id/action_dersFeedFragment_to_feedFragment"
-            app:destination="@id/feedFragment" />
+            app:destination="@id/feedFragment"
+            app:popUpTo="@id/dersFeedFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_dersFeedFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileSettingsFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.ProfileSettingsFragment"
-        android:label="fragment_profile_settings"
+        android:label="Profil Ayarları"
         tools:layout="@layout/fragment_profile_settings" />
     <fragment
         android:id="@+id/sorularimFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.SorularimFragment"
-        android:label="fragment_sorularim"
+        android:label="Sorularım"
         tools:layout="@layout/fragment_sorularim" />
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.FeedFragment"
-        android:label="fragment_feed"
+        android:label="SORUNU PAYLAŞ"
         tools:layout="@layout/fragment_feed" >
         <argument
             android:name="dersName"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.caneryildirim.sorunupaylasyks.view.UploadFragment"
+        android:label="Sorunu Yükle"
+        tools:layout="@layout/fragment_upload" />
 </navigation>

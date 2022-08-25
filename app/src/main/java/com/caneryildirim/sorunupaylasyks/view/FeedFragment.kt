@@ -24,7 +24,7 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
     private lateinit var viewModel:FeedFragmentViewModel
     private var adapterSoru:RecyclerSoruAdapter?=null
     private var soruList:ArrayList<Soru>?= arrayListOf()
-    private lateinit var dersName:String
+    private var dersName:String?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding=FragmentFeedBinding.inflate(inflater,container,false)
@@ -35,18 +35,29 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
+        dersName="null"
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(FeedFragmentViewModel::class.java)
 
+        //Toolbardaki İconların Görünürlük ayarı
+        val activity=activity as MainActivity
+        activity.toolbarIconVisibility(true,true,true)
 
+        dersName="null"
         arguments?.let {
             dersName=FeedFragmentArgs.fromBundle(it).dersName
-            viewModel.refreshData(dersName, this.requireActivity() as DersActivity)
+            if (dersName!="null"){
+                viewModel.refreshData(dersName!!)
+            }else{
+                viewModel.refreshData("Tüm Dersler")
+            }
 
         }
+
 
         binding.recyclerFeedFragment.layoutManager=LinearLayoutManager(this.requireContext())
         adapterSoru= RecyclerSoruAdapter(soruList!!,"47384374837",this)
@@ -61,7 +72,12 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
             binding.textViewErrorFeedFragment.visibility=View.GONE
             binding.recyclerFeedFragment.visibility=View.GONE
             binding.swipeFeedFragment.isRefreshing=false
-            viewModel.refreshData(dersName,this.requireActivity() as DersActivity)
+            if (dersName!="null"){
+                viewModel.refreshData(dersName!!)
+            }else{
+                viewModel.refreshData("Tüm Dersler")
+            }
+
 
         }
 
@@ -95,7 +111,6 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
         viewModel.soruListLive.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.recyclerFeedFragment.visibility=View.VISIBLE
-                //soruList?.addAll(it)
                 adapterSoru?.updateSoruList(it)
 
             }

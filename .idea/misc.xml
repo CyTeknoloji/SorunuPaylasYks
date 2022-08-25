@@ -5,12 +5,25 @@
       <map>
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/addfabbutton.xml" value="0.2535" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/backbutton.xml" value="0.2535" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/badge_shape.xml" value="0.2535" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/cameraselect.xml" value="0.2535" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/cikis_icon.xml" value="0.1405" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/edittextbackground.xml" value="0.2535" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/homebutton.xml" value="0.2535" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/mediaselected.xml" value="0.2535" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/paylas_icon.xml" value="0.1495" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/puan_icon.xml" value="0.1495" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/uploadnew.xml" value="0.1" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_ders.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_notification.xml" value="0.29501216545012166" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_update.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/cart_action_item.xml" value="0.2515625" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_ders_feed.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_upload.xml" value="0.2375" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/menu/bottom_navigation_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/menu/menu_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/xml/file_paths.xml" value="0.2515625" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/detail_button3.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/edittext_background.xml" value="0.1" />
         <entry key="..\:/Users/EndOto/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.1" />

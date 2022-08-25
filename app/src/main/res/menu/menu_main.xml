@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/sirala_icon"
+        android:title="Ara:"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/notificationMain"
+        android:icon="@drawable/bildirim_zil"
+        android:title="Bildirimler"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/alt_menu"
+        android:icon="@drawable/menu_icon"
+        android:title="Item"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/puanver"
+                android:icon="@drawable/puan_icon"
+                android:title="Uygulamaya Puan Ver" />
+            <item
+                android:id="@+id/paylas"
+                android:icon="@drawable/paylas_icon"
+                android:title="Uygulamayı Paylaş" />
+            <item
+                android:id="@+id/signout"
+                android:icon="@drawable/cikis_icon"
+                android:title="Çıkış Yap"
+                android:visible="true" />
+        </menu>
+    </item>
+</menu>
