@@ -1,18 +1,19 @@
 package com.caneryildirim.sorunupaylasyks.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.PopupMenu
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.databinding.SoruRowBinding
 import com.caneryildirim.sorunupaylasyks.util.Soru
+import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoProfil
+import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoSoru
+import com.caneryildirim.sorunupaylasyks.view.DetailActivity
+import com.caneryildirim.sorunupaylasyks.view.ProfileWatchActivity
 import com.google.firebase.Timestamp
-import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,12 +24,13 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
 
     init {
         filterSoruList = soruList
+
     }
 
     interface Delete{
-        fun onItemClick(position: Int)
-        fun sikayetItem(position: Int)
-        fun usteCikar(position: Int)
+        fun onItemClick(docRef:String)
+        fun sikayetItem(soruUid:String,userDisplayName:String,userUid: String)
+        fun usteCikar(docRef:String)
     }
 
     class SoruHolder(val binding: SoruRowBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -41,7 +43,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
     }
 
     override fun onBindViewHolder(holder: SoruHolder, position: Int) {
-        //clickler kaldı
+        //TODO("Clickler kaldı")
 
         if (filterSoruList[position].dogruCevap!=null){
             if (filterSoruList[position].dogruCevap!!){
@@ -57,31 +59,34 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
 
         dateSettings(position,holder)
 
-        holder.binding.odevFeedImageview.setImageResource(R.drawable.whiteimage)
-        Picasso.get().load(filterSoruList[position].downloadUrl).placeholder(R.drawable.whiteimage).into(holder.binding.odevFeedImageview)
 
+        holder.binding.odevFeedImageview.downloadUrlPicassoSoru(filterSoruList[position].downloadUrl)
 
         if (filterSoruList[position].userPhotoUrl=="null"){
             holder.binding.userProfileOdevImageview.setImageResource(R.drawable.personfeed)
         }else{
-            Picasso.get().load(filterSoruList[position].userPhotoUrl).into(holder.binding.userProfileOdevImageview)
+            holder.binding.userProfileOdevImageview.downloadUrlPicassoProfil(filterSoruList[position].userPhotoUrl)
         }
 
         holder.binding.menuRecycler.setOnClickListener {
-            if (userUid==filterSoruList[position].userUid || userUid=="P2dukbTHNMcdyP3FjDOsd7fR6PT2"){
+            if (userUid==filterSoruList[position].userUid || userUid=="6A9F9r4CAhM18qHT1JgiuthRGZm2"){
 
                 val popup= PopupMenu(holder.itemView.context,it)
                 popup.menuInflater.inflate(R.menu.menu_delete,popup.menu)
                 popup.show()
                 popup.setOnMenuItemClickListener {
                     if (it.itemId==R.id.menu_delete){
-                        delete.onItemClick(position)
+                        delete.onItemClick(filterSoruList[position].docRef)
                         true
                     }else if (it.itemId==R.id.menu_ustecikar){
-                        if (farkGunYedek?.toInt()!! <2){
+                        if (farkGunYedek?.toInt()!! < 2){
                             Toast.makeText(holder.itemView.context,"En az 2 gün geçmesi gerekli",Toast.LENGTH_SHORT).show()
                         }else{
-                            delete.usteCikar(position)
+                            if (filterSoruList[position].dogruCevap==true){
+                                Toast.makeText(holder.itemView.context,"Çözülmüş bir soruyu üste çıkaramazsın",Toast.LENGTH_SHORT).show()
+                            }else{
+                                delete.usteCikar(filterSoruList[position].docRef)
+                            }
                         }
                         true
                     }else{
@@ -95,7 +100,10 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
                 popup.show()
                 popup.setOnMenuItemClickListener {
                     if (it.itemId==R.id.menu_block){
-                        delete.sikayetItem(position)
+                        val soruUid=filterSoruList[position].docRef
+                        val userDisplayName=filterSoruList[position].userDisplayName
+                        val userUid=filterSoruList[position].userUid
+                        delete.sikayetItem(soruUid,userDisplayName,userUid)
                         true
                     }else{
                         false
@@ -106,6 +114,23 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
 
         }
 
+        holder.itemView.setOnClickListener {
+            val intent=Intent(holder.itemView.context,DetailActivity::class.java)
+            intent.putExtra("soruUid",filterSoruList[position].docRef)
+            holder.itemView.context.startActivity(intent)
+        }
+
+        holder.binding.userNameOdevText.setOnClickListener {
+            val intent=Intent(holder.itemView.context,ProfileWatchActivity::class.java)
+            intent.putExtra("userUid",filterSoruList[position].userUid)
+            holder.itemView.context.startActivity(intent)
+        }
+
+        holder.binding.userProfileOdevImageview.setOnClickListener {
+            val intent=Intent(holder.itemView.context,ProfileWatchActivity::class.java)
+            intent.putExtra("userUid",filterSoruList[position].userUid)
+            holder.itemView.context.startActivity(intent)
+        }
 
 
     }

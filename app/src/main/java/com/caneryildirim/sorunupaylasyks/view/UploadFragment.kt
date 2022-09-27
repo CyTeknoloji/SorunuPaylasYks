@@ -26,9 +26,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentUploadBinding
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
 import com.caneryildirim.sorunupaylasyks.viewModel.UploadViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -56,7 +58,9 @@ class UploadFragment : Fragment() {
     private val cropActivityGalleryContract=object : ActivityResultContract<Uri?, Uri?>(){
         override fun createIntent(context: Context, input: Uri?): Intent {
             return CropImage.activity(input)
-                .setCropMenuCropButtonTitle("Kırp").setRequestedSize(600,600)
+                .setCropMenuCropButtonTitle("Kırp")
+                .setAspectRatio(1,1)
+                .setRequestedSize(600,600)
                 .getIntent(context)
         }
 
@@ -82,10 +86,6 @@ class UploadFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(UploadViewModel::class.java)
         observeLiveData()
-
-        //Toolbardaki İconların Görünürlük ayarı
-        val activity=activity as MainActivity
-        activity.toolbarIconVisibility(false,false,false)
 
 
         val dersList=viewModel.dersler()
@@ -145,7 +145,7 @@ class UploadFragment : Fragment() {
                 val selectedAciklama=binding.editTextAciklama.text.toString()
                 val selectedDers=dersList[binding.spinnerDers.selectedItemPosition]
                 val selectedKonu=konuPosition
-                viewModel.yukle(this.requireContext(),selectedAciklama,selectedDers,selectedKonu,selectedImage)
+                viewModel.yukle(it,this.requireContext(),requireActivity(),selectedAciklama,selectedDers,selectedKonu,selectedImage)
             }
 
         }
@@ -154,18 +154,23 @@ class UploadFragment : Fragment() {
 
     }
 
+
     private fun observeLiveData() {
         viewModel.uploadLoading.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it){
                 binding.progressBarUpdate.visibility=View.VISIBLE
-                binding.buttonYukle.isClickable=false
-                binding.cameraSelected.isClickable=false
-                binding.gallerySelected.isClickable=false
+                binding.buttonYukle.isEnabled=false
+                binding.cameraSelected.isEnabled=false
+                binding.gallerySelected.isEnabled=false
+                val activity=activity as MainActivity
+                Singleton.whereFragment ="UploadFragment"
             }else{
                 binding.progressBarUpdate.visibility=View.GONE
-                binding.buttonYukle.isClickable=true
-                binding.cameraSelected.isClickable=true
-                binding.gallerySelected.isClickable=true
+                binding.buttonYukle.isEnabled=true
+                binding.cameraSelected.isEnabled=true
+                binding.gallerySelected.isEnabled=true
+                val activity=activity as MainActivity
+                Singleton.whereFragment ="null"
             }
         })
 

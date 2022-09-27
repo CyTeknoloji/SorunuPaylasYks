@@ -4,8 +4,8 @@
     package="com.caneryildirim.sorunupaylasyks">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SorunuPaylasYks"
         tools:targetApi="31">
+        <activity
+            android:name=".view.ProfileWatchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.DetailActivity"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.caneryildirim.sorunupaylasyks.fileprovider"
@@ -24,7 +31,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity

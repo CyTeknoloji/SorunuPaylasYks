@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/cameraselectprofile.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/deletenot.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/detail_button.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/dotimage.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/dotwhite.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/edittext_background.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/filter.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/drawable/mediaselectprofile.xml" value="0.148" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_detail.xml" value="0.264" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/activity_profile_watch.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/cevap_detail_alert.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_feed.xml" value="0.264" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_notification.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_profile_settings.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_profile_watch.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_sorularim.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/fragment_upload.xml" value="0.12284701114488349" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/layout/recycler_notification_row.xml" value="0.2515625" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/menu/bottom_navigation_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/menu/menu_feedfragment.xml" value="0.2515625" />
+        <entry key="..\:/Users/CanerYildirim/AndroidStudioProjects/SorunuPaylasYks/app/src/main/res/menu/menu_main.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/addfabbutton.xml" value="0.2535" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/backbutton.xml" value="0.2535" />
         <entry key="..\:/Users/CanerYildirim/StudioProjects/SorunuPaylasYks/app/src/main/res/drawable/badge_shape.xml" value="0.2535" />

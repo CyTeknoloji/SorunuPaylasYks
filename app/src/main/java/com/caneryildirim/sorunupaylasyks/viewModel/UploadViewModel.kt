@@ -2,18 +2,16 @@ package com.caneryildirim.sorunupaylasyks.viewModel
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
-import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.onesignal.OneSignal
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,8 +21,8 @@ class UploadViewModel:ViewModel() {
     val firestore=Firebase.firestore
     val uploadLoading= MutableLiveData<Boolean>(false)
 
-    fun yukle(context:Context,selectedAciklama:String,selectedDers:String,selectedKonu:String,selectedImage:Uri?){
-        //TODO("yükleme tamamlanana kadar bottomNavigation butonlarına ve geri butonuna basılamamalı")
+    fun yukle(view: View,context:Context,activity: Activity, selectedAciklama:String, selectedDers:String, selectedKonu:String, selectedImage:Uri?){
+        //TODO("yükleme tamamlanana kadar bottomNavigation butonlarına basılamamalı")
         uploadLoading.value=true
         val uuid=UUID.randomUUID().toString()
         val imageName="${uuid}.jpg"
@@ -33,9 +31,8 @@ class UploadViewModel:ViewModel() {
         val userDisplayName=auth.currentUser!!.displayName
         val userPhotoUrl=auth.currentUser!!.photoUrl.toString()
         val reference=storage.reference.child("images").child(imageName)
-        val docRef=uuid.toString()
-        //TODO("Onesignal ayarla")
-        //val pId=OneSignal.getDeviceState()?.userId
+        val docRef=uuid
+        val pId= OneSignal.getDeviceState()?.userId
             reference.putFile(selectedImage!!).addOnSuccessListener {
                 val uploadImageReference=storage.reference.child("images").child(imageName)
                 uploadImageReference.downloadUrl.addOnSuccessListener {
@@ -54,36 +51,33 @@ class UploadViewModel:ViewModel() {
                     postMap.put("dogruCevap",false)
                     postMap.put("dogruCevapString","null")
                     postMap.put("dogruCevapImage","null")
-                    //TODO("Onesignali ayarla")
-                    /*
-                    if (pId != null) {
-                        postMap.put("pId",pId)
-                    }
-
-                     */
+                    pId?.let { postMap.put("pId",pId) }
 
                     firestore.collection("Sorular").document(docRef).set(postMap).addOnSuccessListener {
                         uploadLoading.value=false
-                        Toast.makeText(context,"Sorunuz yüklendi",Toast.LENGTH_LONG).show()
-                        //TODO("feedFragment a geri dönmeli aksiyonla, ayrıca uploadfragment arkaplanda çalışmasın")
+                        Toast.makeText(context,"Sorunuz yüklendi",Toast.LENGTH_SHORT).show()
+                        activity.onBackPressed()
+
+                        //val action=UploadFragmentDirections.actionUploadFragmentToFeedFragment()
+                        //Navigation.findNavController(view).navigate(action)
                     }.addOnFailureListener {
                         //firebase yüklenemedi
                         uploadLoading.value=false
-                        Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_SHORT).show()
 
 
                     }
                 }.addOnFailureListener {
                     //downloadUrl yüklenemedi
                     uploadLoading.value=false
-                    Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_SHORT).show()
 
 
                 }
             }.addOnFailureListener {
                 //storage yüklemenedi
                 uploadLoading.value=false
-                Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"Sorunuz bir hatadan dolayı yüklenemedi. Lütfen tekrar deneyiniz",Toast.LENGTH_SHORT).show()
             }
 
     }

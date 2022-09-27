@@ -119,7 +119,6 @@ class KayitFragment : Fragment() {
 
         viewModel.userNames.observe(viewLifecycleOwner, Observer {
             userNames?.addAll(it)
-
         })
 
         viewModel.errorInternet.observe(viewLifecycleOwner, Observer {

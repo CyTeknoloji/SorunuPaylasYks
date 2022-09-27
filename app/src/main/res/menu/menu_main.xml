@@ -3,15 +3,86 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/sirala_icon"
-        android:title="Ara:"
-        app:showAsAction="always" />
+        android:id="@+id/deleteNotification"
+        android:icon="@drawable/deletenot"
+        android:title="Sil:"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/okunanlari_sil"
+                android:title="Okunan Bildirimleri Sil"/>
+
+            <item
+                android:id="@+id/tumunu_sil"
+                android:title="Tümünü Sil"/>
+
+
+        </menu>
+
+    </item>
     <item
-        android:id="@+id/notificationMain"
-        android:icon="@drawable/bildirim_zil"
-        android:title="Bildirimler"
-        app:showAsAction="always" />
+        android:id="@+id/filterMenu"
+        android:icon="@drawable/filtericon"
+        android:title="Filtre:"
+        app:showAsAction="always" >
+        <menu>
+            <item
+                android:id="@+id/tumdersler_menu"
+                android:icon="@drawable/imagederstum"
+                android:title="Tüm Dersler"/>
+            <item
+                android:id="@+id/turkce_menu"
+                android:icon="@drawable/turkceicon"
+                android:title="Türkçe"/>
+            <item
+                android:id="@+id/matematik_menu"
+                android:icon="@drawable/imagedersmatematik"
+                android:title="Matematik"/>
+            <item
+                android:id="@+id/geometri_menu"
+                android:icon="@drawable/geometriicon"
+                android:title="Geometri"/>
+            <item
+                android:id="@+id/fizik_menu"
+                android:icon="@drawable/imagedersfizik"
+                android:title="Fizik"/>
+            <item
+                android:id="@+id/kimya_menu"
+                android:icon="@drawable/imagederskimya"
+                android:title="Kimya"/>
+            <item
+                android:id="@+id/biyoloji_menu"
+                android:icon="@drawable/imagedersbiyoloji"
+                android:title="Bİyoloji"/>
+            <item
+                android:id="@+id/edebiyat_menu"
+                android:icon="@drawable/edebiyaticon"
+                android:title="Edebiyat"/>
+            <item
+                android:id="@+id/din_menu"
+                android:icon="@drawable/imagedersdin"
+                android:title="Din"/>
+            <item
+                android:id="@+id/cografya_menu"
+                android:icon="@drawable/imagederscografya"
+                android:title="Coğrafya"/>
+            <item
+                android:id="@+id/tarih_menu"
+                android:icon="@drawable/imagederstarih"
+                android:title="Tarih"/>
+            <item
+                android:id="@+id/yabancidil_menu"
+                android:icon="@drawable/imagedersingilizce"
+                android:title="Yabancı Dil" />
+            <item
+                android:id="@+id/felsefe_menu"
+                android:icon="@drawable/imagedersvatandaslik"
+                android:title="Felsefe"/>
+
+        </menu>
+
+
+    </item>
     <item
         android:id="@+id/alt_menu"
         android:icon="@drawable/menu_icon"

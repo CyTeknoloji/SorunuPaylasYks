@@ -24,6 +24,8 @@ import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.onesignal.OneSignal
+import io.grpc.internal.DnsNameResolver
 import java.io.ByteArrayOutputStream
 
 class KayitViewModel:ViewModel() {
@@ -138,6 +140,7 @@ class KayitViewModel:ViewModel() {
                                 userNameData.put("userUid",auth.currentUser!!.uid)
                                 userNameData.put("userEmail", auth.currentUser!!.email!!)
                                 userNameData.put("userPhotoUrl",auth.currentUser!!.photoUrl!!)
+
                                 db.collection("Usernames").add(userNameData).addOnSuccessListener {
                                     Toast.makeText(context,"Epostanıza aktivasyon kodu gönderildi.",Toast.LENGTH_SHORT).show()
                                     auth.signOut()

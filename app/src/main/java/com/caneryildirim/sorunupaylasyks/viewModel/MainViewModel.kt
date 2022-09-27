@@ -5,38 +5,61 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.view.FeedFragmentDirections
 import com.caneryildirim.sorunupaylasyks.view.SingActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.onesignal.OneSignal
 
 class MainViewModel:ViewModel() {
     private val auth=Firebase.auth
+    private val db=Firebase.firestore
+    private var registiration: ListenerRegistration?=null
+    var notificationNumber=MutableLiveData<Int>(0)
 
-    fun signOut(context: Context,activity:Activity){
-        auth.signOut()
-        val intent= Intent(context, SingActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        context.startActivity(intent)
-        activity.finish()
+
+
+    fun oneSignal(context: Context){
+        // Logging set to help debug issues, remove before releasing your app.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(context)
+        OneSignal.setAppId(Singleton.ONESIGNAL_APP_ID)
     }
 
-    fun puanVer(context: Context){
-        val packageName = "com.caneryildirim.sorunupaylasyks"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${packageName}"))
-        context.startActivity(intent)
+
+
+    fun adminPid(){
+        if (auth.currentUser!!.uid=="6A9F9r4CAhM18qHT1JgiuthRGZm2"){
+            val pId=OneSignal.getDeviceState()?.userId.toString()
+            val pIdMap= hashMapOf<String,Any>()
+            pIdMap.put("pId",pId)
+            db.collection("Admin").document(auth.currentUser!!.uid).set(pIdMap).addOnSuccessListener {
+
+            }
+        }
     }
 
-    fun paylas(context: Context){
-        val shareBody="Sorunu Paylaş uygulamasını Play Store'dan yükle : https://play.google.com/store/apps/details?id=com.caneryildirim.sorunupaylasyks"
-        val shareIntent=Intent(Intent.ACTION_SEND)
-        shareIntent.type="text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT,shareBody)
-        context.startActivity(Intent.createChooser(shareIntent,"Paylaş"))
+    fun getNotNumber(){
+        registiration=db.collection("Users").document(auth.currentUser!!.uid).collection("Bildirimler")
+            .whereNotEqualTo("okundu",true)
+            .addSnapshotListener { value, error ->
+                if (value!=null){
+                    notificationNumber.value=value.size()
+                }
+            }
     }
 
 
     override fun onCleared() {
         super.onCleared()
+        registiration?.remove()
     }
 }

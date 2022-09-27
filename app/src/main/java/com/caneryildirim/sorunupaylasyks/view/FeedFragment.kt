@@ -1,21 +1,24 @@
 package com.caneryildirim.sorunupaylasyks.view
 
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.adapter.RecyclerSoruAdapter
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentFeedBinding
-import com.caneryildirim.sorunupaylasyks.util.Ders
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
 import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.viewModel.FeedFragmentViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
@@ -25,6 +28,7 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
     private var adapterSoru:RecyclerSoruAdapter?=null
     private var soruList:ArrayList<Soru>?= arrayListOf()
     private var dersName:String?=null
+    private lateinit var auth:FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding=FragmentFeedBinding.inflate(inflater,container,false)
@@ -35,7 +39,6 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
-        dersName="null"
     }
 
 
@@ -43,44 +46,142 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(FeedFragmentViewModel::class.java)
 
-        //Toolbardaki İconların Görünürlük ayarı
-        val activity=activity as MainActivity
-        activity.toolbarIconVisibility(true,true,true)
+        viewModel.controlNotification(requireContext(),requireView())
+        Singleton.whereFragment ="FeedFragment"
 
-        dersName="null"
-        arguments?.let {
-            dersName=FeedFragmentArgs.fromBundle(it).dersName
-            if (dersName!="null"){
-                viewModel.refreshData(dersName!!)
-            }else{
-                viewModel.refreshData("Tüm Dersler")
-            }
+        viewModel.refreshData(this.requireContext())
 
-        }
-
+        auth=Firebase.auth
+        val user=auth.currentUser
 
         binding.recyclerFeedFragment.layoutManager=LinearLayoutManager(this.requireContext())
-        adapterSoru= RecyclerSoruAdapter(soruList!!,"47384374837",this)
+        adapterSoru= RecyclerSoruAdapter(soruList!!,user!!.uid,this)
         binding.recyclerFeedFragment.adapter=adapterSoru
 
+        createMenu()
         observeLiveData()
+        swipeOn()
 
 
+    }
+
+    private fun createMenu() {
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object :MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_main, menu)
+
+                val itemNotification=menu.findItem(R.id.deleteNotification)
+                itemNotification.isVisible=false
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when(menuItem.itemId){
+                    R.id.paylas->{
+                        viewModel.paylas(requireContext())
+                        return true
+                    }
+                    R.id.puanver->{
+                        viewModel.puanVer(requireContext())
+                        return true
+                    }
+                    R.id.signout->{
+                        viewModel.signOut(requireContext(),requireActivity())
+                        return true
+                    }
+                    R.id.tumdersler_menu->{
+                        dersName=null
+                        viewModel.refreshData(requireContext())
+                        return true
+                    }
+                    R.id.turkce_menu->{
+                        dersName="Türkçe"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.matematik_menu->{
+                        dersName="Matematik"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.geometri_menu->{
+                        dersName="Geometri"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.fizik_menu->{
+                        dersName="Fizik"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.kimya_menu->{
+                        dersName="Kimya"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.biyoloji_menu->{
+                        dersName="Biyoloji"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.edebiyat_menu->{
+                        dersName="Edebiyat"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.din_menu->{
+                        dersName="Din Kültürü ve Ahlak Bilgisi"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.cografya_menu->{
+                        dersName="Coğrafya"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.tarih_menu->{
+                        dersName="Tarih"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.yabancidil_menu->{
+                        dersName="Yabancı Dil"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    R.id.felsefe_menu->{
+                        dersName="Felsefe"
+                        viewModel.selectedData(requireContext(),dersName!!)
+                        return true
+                    }
+                    else->{
+                        return false
+                    }
+                }
+
+            }
+
+        },viewLifecycleOwner,Lifecycle.State.RESUMED)
+    } 
+
+    private fun swipeOn() {
+        //swipe ayarları
         binding.swipeFeedFragment.setColorSchemeColors(resources.getColor(R.color.purple_500))
         binding.swipeFeedFragment.setOnRefreshListener {
             binding.progressBarFeedFragment.visibility=View.GONE
             binding.textViewErrorFeedFragment.visibility=View.GONE
             binding.recyclerFeedFragment.visibility=View.GONE
             binding.swipeFeedFragment.isRefreshing=false
-            if (dersName!="null"){
-                viewModel.refreshData(dersName!!)
+            if (dersName==null){
+                viewModel.refreshData(this.requireContext())
             }else{
-                viewModel.refreshData("Tüm Dersler")
+                viewModel.selectedData(this.requireContext(),dersName!!)
             }
 
 
         }
-
     }
 
     private fun observeLiveData() {
@@ -119,17 +220,18 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
 
     }
 
-    override fun onItemClick(position: Int) {
-
+    override fun onItemClick(docRef:String) {
+        viewModel.onItemClick(this.requireContext(),docRef,dersName)
     }
 
-    override fun sikayetItem(position: Int) {
-
+    override fun sikayetItem(soruUid: String, userDisplayName: String, userUid: String) {
+        viewModel.sikayetEt(this.requireContext(),soruUid,userDisplayName,userUid)
     }
 
-    override fun usteCikar(position: Int) {
-
+    override fun usteCikar(docRef: String) {
+        viewModel.usteCikar(this.requireContext(),docRef,dersName)
     }
 
 
 }
+
