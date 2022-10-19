@@ -44,6 +44,8 @@ class ProfileSettingsFragment : Fragment() {
         viewModel=ViewModelProvider(this).get(ProfileSettingsViewModel::class.java)
         observeLiveData()
 
+        viewModel.controlNotification(requireContext(),requireView())
+
         viewModel.getDataUsername()
         createMenu()
 

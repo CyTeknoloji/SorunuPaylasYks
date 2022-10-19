@@ -9,12 +9,20 @@
         android:id="@+id/profileSettingsFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.ProfileSettingsFragment"
         android:label="Profil Ayarları"
-        tools:layout="@layout/fragment_profile_settings" />
+        tools:layout="@layout/fragment_profile_settings" >
+        <action
+            android:id="@+id/action_profileSettingsFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sorularimFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.SorularimFragment"
         android:label="Sorularım"
-        tools:layout="@layout/fragment_sorularim" />
+        tools:layout="@layout/fragment_sorularim" >
+        <action
+            android:id="@+id/action_sorularimFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.FeedFragment"
@@ -35,7 +43,11 @@
         android:id="@+id/uploadFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.UploadFragment"
         android:label="Sorunu Yükle"
-        tools:layout="@layout/fragment_upload" />
+        tools:layout="@layout/fragment_upload" >
+        <action
+            android:id="@+id/action_uploadFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.caneryildirim.sorunupaylasyks.view.NotificationFragment"

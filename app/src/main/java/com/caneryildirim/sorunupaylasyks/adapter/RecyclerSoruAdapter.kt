@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 
 class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val delete:Delete):RecyclerView.Adapter<RecyclerSoruAdapter.SoruHolder>(),Filterable {
     var filterSoruList = ArrayList<Soru>()
-    var farkGunYedek:Long?=null
+    //var farkGunYedek:Long?=null
 
     init {
         filterSoruList = soruList
@@ -43,7 +43,6 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
     }
 
     override fun onBindViewHolder(holder: SoruHolder, position: Int) {
-        //TODO("Clickler kaldı")
 
         if (filterSoruList[position].dogruCevap!=null){
             if (filterSoruList[position].dogruCevap!!){
@@ -57,7 +56,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
         holder.binding.konuOdevText.text="Konu:${filterSoruList[position].selectedKonu}"
         holder.binding.userNameOdevText.text=filterSoruList[position].userDisplayName
 
-        dateSettings(position,holder)
+        val kacGun=dateSettings(position,holder)
 
 
         holder.binding.odevFeedImageview.downloadUrlPicassoSoru(filterSoruList[position].downloadUrl)
@@ -79,7 +78,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
                         delete.onItemClick(filterSoruList[position].docRef)
                         true
                     }else if (it.itemId==R.id.menu_ustecikar){
-                        if (farkGunYedek?.toInt()!! < 2){
+                        if (kacGun.toInt() < 2){
                             Toast.makeText(holder.itemView.context,"En az 2 gün geçmesi gerekli",Toast.LENGTH_SHORT).show()
                         }else{
                             if (filterSoruList[position].dogruCevap==true){
@@ -123,12 +122,16 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
         holder.binding.userNameOdevText.setOnClickListener {
             val intent=Intent(holder.itemView.context,ProfileWatchActivity::class.java)
             intent.putExtra("userUid",filterSoruList[position].userUid)
+            intent.putExtra("userName",filterSoruList[position].userDisplayName)
+            intent.putExtra("userPhotoUrl",filterSoruList[position].userPhotoUrl)
             holder.itemView.context.startActivity(intent)
         }
 
         holder.binding.userProfileOdevImageview.setOnClickListener {
             val intent=Intent(holder.itemView.context,ProfileWatchActivity::class.java)
             intent.putExtra("userUid",filterSoruList[position].userUid)
+            intent.putExtra("userName",filterSoruList[position].userDisplayName)
+            intent.putExtra("userPhotoUrl",filterSoruList[position].userPhotoUrl)
             holder.itemView.context.startActivity(intent)
         }
 
@@ -154,7 +157,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
 
     }
 
-    fun dateSettings(position:Int,holder:SoruHolder){
+    fun dateSettings(position:Int,holder:SoruHolder):Long{
         val dateFirst=filterSoruList[position].date.toDate().time
         val now= Timestamp.now().toDate().time
         val nowTime=getTimeDate(now)
@@ -167,7 +170,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
         val farkDakika=diff/(60*1000)
         val farkSaat=farkDakika/60
         val farkGun=farkSaat/24
-        farkGunYedek=farkGun
+        //farkGunYedek=farkGun
         val farkHafta=farkGun/7
         val farkAy=farkHafta/4
         val farkYil=farkAy/12
@@ -188,7 +191,7 @@ class RecyclerSoruAdapter(val soruList:ArrayList<Soru>,val userUid:String,val de
             holder.binding.tarihOdevText.text="${farkYil} Yıl Önce"
         }
 
-
+        return farkGun
     }
 
     override fun getFilter(): Filter {

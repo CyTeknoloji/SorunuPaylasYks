@@ -150,7 +150,6 @@ class KayitFragment : Fragment() {
                         println(e.localizedMessage)
 
                     }
-
             }
         }
     }

@@ -7,6 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.view.FeedFragmentDirections
+import com.caneryildirim.sorunupaylasyks.view.UploadFragmentDirections
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -20,6 +24,16 @@ class UploadViewModel:ViewModel() {
     val storage=Firebase.storage
     val firestore=Firebase.firestore
     val uploadLoading= MutableLiveData<Boolean>(false)
+
+    fun controlNotification(context: Context,view:View){
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+        OneSignal.initWithContext(context)
+        OneSignal.setAppId(Singleton.ONESIGNAL_APP_ID)
+        OneSignal.setNotificationOpenedHandler {
+            val action= UploadFragmentDirections.actionUploadFragmentToNotificationFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+    }
 
     fun yukle(view: View,context:Context,activity: Activity, selectedAciklama:String, selectedDers:String, selectedKonu:String, selectedImage:Uri?){
         //TODO("yükleme tamamlanana kadar bottomNavigation butonlarına basılamamalı")

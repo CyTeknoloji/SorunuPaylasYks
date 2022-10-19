@@ -22,21 +22,28 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.caneryildirim.sorunupaylasyks.adapter.RecyclerCevapAdapter
 import com.caneryildirim.sorunupaylasyks.adapter.RecyclerSoruAdapter
 import com.caneryildirim.sorunupaylasyks.databinding.ActivityDetailBinding
 import com.caneryildirim.sorunupaylasyks.databinding.CevapDetailAlertBinding
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.util.Cevap
+import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoProfil
 import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoSoru
 import com.caneryildirim.sorunupaylasyks.viewModel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.theartofdev.edmodo.cropper.CropImage
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(),RecyclerCevapAdapter.Delete {
     private lateinit var binding:ActivityDetailBinding
     private lateinit var viewModel:DetailViewModel
 
@@ -50,6 +57,11 @@ class DetailActivity : AppCompatActivity() {
     private var requestFrom: String?=null
 
     private lateinit var  downloadUrlString:String
+
+    private var adapterCevap:RecyclerCevapAdapter?=null
+    private var cevapList:ArrayList<Cevap>?= arrayListOf()
+    private var soruUid: String?=null
+    private var farkGunForViewModel:Long?=null
 
 
 
@@ -76,6 +88,8 @@ class DetailActivity : AppCompatActivity() {
         val view=binding.root
         setContentView(view)
 
+        adMobView()
+
         binding.toolbarDetailLast.title="Soru Detayları"
         binding.toolbarDetailLast.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(binding.toolbarDetailLast)
@@ -90,16 +104,42 @@ class DetailActivity : AppCompatActivity() {
         registerLauncher()
 
         val intent=intent
-        val soruUid= intent.getStringExtra("soruUid")
+        soruUid= intent.getStringExtra("soruUid")
 
         viewModel.getSoruData(soruUid)
+        viewModel.getRecyclerData(soruUid!!)
+
+
+        val auth= Firebase.auth
+        val user=auth.currentUser
+
+        binding.recyclerDetailLast.layoutManager= LinearLayoutManager(this)
+        adapterCevap= RecyclerCevapAdapter(this,cevapList!!,user!!.uid)
+        binding.recyclerDetailLast.adapter=adapterCevap
 
         binding.imageSoruDetailLast.setOnClickListener {
             viewModel.zoomImage(this,downloadUrlString,layoutInflater)
         }
 
+        binding.menuOption.setOnClickListener {
+            viewModel.menuOption(this,it,this,farkGunForViewModel)
+        }
 
+        binding.userNameTextDetailLast.setOnClickListener {
+            viewModel.goToProfileWatch(this)
+        }
 
+        binding.imageUserProfileDetailLast.setOnClickListener {
+            viewModel.goToProfileWatch(this)
+        }
+
+    }
+
+    private fun adMobView() {
+        if (Singleton.mInterstitialAd !=null){
+            Singleton.mInterstitialAd?.show(this)
+            Singleton.mInterstitialAd =null
+        }
     }
 
 
@@ -124,8 +164,55 @@ class DetailActivity : AppCompatActivity() {
         viewModel.loadingLive.observe(this, androidx.lifecycle.Observer {
             if (it){
                 binding.progressBarDetailLast.visibility=View.VISIBLE
+                binding.recyclerDetailLast.visibility=View.GONE
+                binding.imageUserProfileDetailLast.visibility=View.GONE
+                binding.userNameTextDetailLast.visibility=View.GONE
+                binding.textTimeDetailLast.visibility=View.GONE
+                binding.menuOption.visibility=View.GONE
+                binding.imageSoruDetailLast.visibility=View.GONE
+                binding.textDersDetailLast.visibility=View.GONE
+                binding.textKonuDetailLast.visibility=View.GONE
+                binding.textAciklamaDetailLast.visibility=View.GONE
+                binding.cevapGonderLast.isEnabled=false
+                binding.selectCameraLast.isClickable=false
+                binding.selectMediaLast.isClickable=false
             }else{
                 binding.progressBarDetailLast.visibility=View.GONE
+                binding.recyclerDetailLast.visibility=View.VISIBLE
+                binding.imageUserProfileDetailLast.visibility=View.VISIBLE
+                binding.userNameTextDetailLast.visibility=View.VISIBLE
+                binding.textTimeDetailLast.visibility=View.VISIBLE
+                binding.menuOption.visibility=View.VISIBLE
+                binding.imageSoruDetailLast.visibility=View.VISIBLE
+                binding.textDersDetailLast.visibility=View.VISIBLE
+                binding.textKonuDetailLast.visibility=View.VISIBLE
+                binding.textAciklamaDetailLast.visibility=View.VISIBLE
+                binding.cevapGonderLast.isEnabled=true
+                binding.selectCameraLast.isClickable=true
+                binding.selectMediaLast.isClickable=true
+            }
+        })
+
+        viewModel.successYukle.observe(this, androidx.lifecycle.Observer {
+            if (it){
+                binding.cevapTextLast.setText("")
+                binding.selectCameraLast.setImageResource(com.caneryildirim.sorunupaylasyks.R.drawable.cameraselect)
+                binding.selectMediaLast.setImageResource(com.caneryildirim.sorunupaylasyks.R.drawable.mediaselected)
+                Toast.makeText(this,"Cevabın Yüklendi",Toast.LENGTH_SHORT).show()
+                selectedImage=null
+                //viewModel.getRecyclerData(soruUid!!)
+            }
+
+        })
+
+        viewModel.cevapDataLive.observe(this, androidx.lifecycle.Observer {
+            if (it.size>0){
+                binding.textCevapYokLast.visibility=View.GONE
+                binding.recyclerDetailLast.visibility=View.VISIBLE
+                adapterCevap?.updateCevapList(it)
+            }else{
+                binding.textCevapYokLast.visibility=View.VISIBLE
+                binding.recyclerDetailLast.visibility=View.GONE
             }
         })
     }
@@ -166,7 +253,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun yukle(view: View){
-
+        viewModel.yukle(this,binding.cevapTextLast.text.toString().trim(),selectedImage)
     }
 
 
@@ -175,6 +262,8 @@ class DetailActivity : AppCompatActivity() {
         cropActivityGalleryResultLauncher=registerForActivityResult(cropActivityGalleryContract){uri->
             uri.let {
                 selectedImage=it
+                binding.selectMediaLast.setImageResource(com.caneryildirim.sorunupaylasyks.R.drawable.mediaselectok)
+                binding.selectCameraLast.setImageResource(com.caneryildirim.sorunupaylasyks.R.drawable.cameraselectok)
             }
         }
 
@@ -279,6 +368,7 @@ class DetailActivity : AppCompatActivity() {
         val farkDakika=diff/(60*1000)
         val farkSaat=farkDakika/60
         val farkGun=farkSaat/24
+        farkGunForViewModel=farkGun
         val farkHafta=farkGun/7
         val farkAy=farkHafta/4
         val farkYil=farkAy/12
@@ -300,6 +390,26 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onItemDelete(position: Int, docUuid: String, dogruCevap: Boolean) {
+        viewModel.onItemDelete(this,docUuid,dogruCevap)
+    }
+
+    override fun sikayetItem(position: Int) {
+        viewModel.sikayetItem(this,position)
+    }
+
+    override fun duzenleItem(position: Int) {
+
+    }
+
+    override fun guncelleItem(position: Int) {
+        viewModel.guncelleItem(this,position)
+    }
+
+    override fun onItemClick(position: Int) {
+        viewModel.onItemClick(this,position,layoutInflater)
     }
 
 }

@@ -78,8 +78,6 @@ class KayitViewModel:ViewModel() {
                 updateUI(null,context,activity)
                 println(it.localizedMessage)
             }
-
-
     }
 
 

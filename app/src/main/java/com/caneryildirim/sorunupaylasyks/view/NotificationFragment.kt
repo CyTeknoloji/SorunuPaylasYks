@@ -13,6 +13,7 @@ import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.adapter.RecyclerNotificationAdapter
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentNotificationBinding
 import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton.notificationInfo
 import com.caneryildirim.sorunupaylasyks.util.Notification
 import com.caneryildirim.sorunupaylasyks.viewModel.NotificationViewModel
 
@@ -44,6 +45,8 @@ class NotificationFragment : Fragment(),RecyclerNotificationAdapter.Click {
 
         Singleton.whereFragment ="NotificationFragment"
         viewModel.getNotData(this.requireContext())
+
+        notificationInfo=false
 
         binding.recyclerNotification.layoutManager=LinearLayoutManager(requireContext())
         adapterNotification=RecyclerNotificationAdapter(notificationList!!,this)

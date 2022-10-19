@@ -87,6 +87,8 @@ class UploadFragment : Fragment() {
         viewModel=ViewModelProvider(this).get(UploadViewModel::class.java)
         observeLiveData()
 
+        viewModel.controlNotification(requireContext(),requireView())
+
 
         val dersList=viewModel.dersler()
         val dersAdaptor= ArrayAdapter(this.requireContext(),android.R.layout.simple_list_item_1,android.R.id.text1,dersList)

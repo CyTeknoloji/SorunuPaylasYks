@@ -10,7 +10,7 @@
         android:id="@+id/toolbarDetailLast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/purple_500"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,16 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/backbutton" />
-
-    <ImageView
-        android:id="@+id/detailLastPopupMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarDetailLast"
-        app:layout_constraintEnd_toEndOf="@+id/toolbarDetailLast"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dotwhite" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollViewLast"
@@ -45,113 +35,126 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/userNameTextDetailLast"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:text="TextView"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageUserProfileDetailLast"
-                app:layout_constraintEnd_toStartOf="@+id/textTimeDetailLast"
-                app:layout_constraintStart_toEndOf="@+id/imageUserProfileDetailLast"
-                app:layout_constraintTop_toTopOf="@+id/imageUserProfileDetailLast" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageUserProfileDetailLast"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/profileperson" />
-
-
-            <TextView
-                android:id="@+id/textTimeDetailLast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="Tarih:"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageUserProfileDetailLast"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageUserProfileDetailLast" />
-
-            <com.caneryildirim.sorunupaylasyks.util.DynamicImageView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/imageSoruDetailLast"
-                android:layout_marginTop="5dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageUserProfileDetailLast"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/textDersDetailLast"
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:text="Ders:"
-                android:textSize="15sp"
-                android:textStyle="bold"
+                app:cardBackgroundColor="@color/cardviewcolor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageSoruDetailLast" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textKonuDetailLast"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="5dp"
-                android:text="Konu:"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textDersDetailLast" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textAciklamaDetailLast"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="5dp"
-                android:text="Açıklama:"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textKonuDetailLast" />
+                    <TextView
+                        android:id="@+id/userNameTextDetailLast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="TextView"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageUserProfileDetailLast"
+                        app:layout_constraintEnd_toStartOf="@+id/textTimeDetailLast"
+                        app:layout_constraintStart_toEndOf="@+id/imageUserProfileDetailLast"
+                        app:layout_constraintTop_toTopOf="@+id/imageUserProfileDetailLast" />
 
-            <TextView
-                android:id="@+id/textViewCevaplarLast"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="1dp"
-                android:background="@color/purple_500"
-                android:text="Cevaplar:"
-                android:textColor="#5E35B1"
-                android:textSize="19dp"
-                android:textStyle="bold|italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textAciklamaDetailLast" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageUserProfileDetailLast"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/profileperson" />
+
+                    <TextView
+                        android:id="@+id/textTimeDetailLast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="Tarih:"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/userNameTextDetailLast"
+                        app:layout_constraintEnd_toStartOf="@+id/menuOption"
+                        app:layout_constraintTop_toTopOf="@+id/userNameTextDetailLast" />
+
+                    <com.caneryildirim.sorunupaylasyks.util.DynamicImageView
+                        android:id="@+id/imageSoruDetailLast"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="5dp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintTop_toBottomOf="@+id/imageUserProfileDetailLast"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/menuOption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textTimeDetailLast"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textTimeDetailLast"
+                        app:srcCompat="@drawable/dot2" />
+
+                    <TextView
+                        android:id="@+id/textDersDetailLast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="Ders:"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageSoruDetailLast" />
+
+                    <TextView
+                        android:id="@+id/textKonuDetailLast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="5dp"
+                        android:text="Konu:"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textDersDetailLast" />
+
+                    <TextView
+                        android:id="@+id/textAciklamaDetailLast"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Açıklama:"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textKonuDetailLast" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarDetailLast"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/textAciklamaDetailLast"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerDetailLast"
@@ -165,27 +168,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewCevaplarLast" />
 
             <TextView
+                android:id="@+id/textViewCevaplarLast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="1dp"
+                android:background="@color/purple_200"
+                android:text="Cevaplar:"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <TextView
                 android:id="@+id/textCevapYokLast"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:text="Henüz Soruya Cevap Veren Olmamış."
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCevaplarLast" />
-
-            <ProgressBar
-                android:id="@+id/progressBarDetailLast"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/recyclerDetailLast"
-                app:layout_constraintEnd_toStartOf="@+id/imageSoruDetailLast"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintStart_toEndOf="@+id/imageSoruDetailLast"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/recyclerDetailLast" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

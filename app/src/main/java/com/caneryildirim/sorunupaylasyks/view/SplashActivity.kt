@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         // Admob Id= ca-app-pub-8642310051732821/6508290767
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this,"ca-app-pub-8642310051732821/6508290767", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 mInterstitialAd=null
 

@@ -2,18 +2,19 @@ package com.caneryildirim.sorunupaylasyks.view
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.caneryildirim.sorunupaylasyks.R
 import com.caneryildirim.sorunupaylasyks.adapter.RecyclerSoruAdapter
 import com.caneryildirim.sorunupaylasyks.databinding.FragmentFeedBinding
 import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton.notificationInfo
 import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.viewModel.FeedFragmentViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +30,7 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
     private var soruList:ArrayList<Soru>?= arrayListOf()
     private var dersName:String?=null
     private lateinit var auth:FirebaseAuth
+    private var infoGetData:Boolean=false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding=FragmentFeedBinding.inflate(inflater,container,false)
@@ -41,21 +43,44 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
         _binding=null
     }
 
+    override fun onPause() {
+        super.onPause()
+        infoGetData=false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!infoGetData){
+            viewModel.refreshData(this.requireContext())
+        }
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel=ViewModelProvider(this).get(FeedFragmentViewModel::class.java)
 
+        //DetailActivity den bildirim bilgisi gönderildiği zaman çalışacak
+        notificationInfo?.let {
+            if (it){
+                val action=FeedFragmentDirections.actionFeedFragmentToNotificationFragment()
+                Navigation.findNavController(view).navigate(action)
+            }
+        }
+
         viewModel.controlNotification(requireContext(),requireView())
         Singleton.whereFragment ="FeedFragment"
 
         viewModel.refreshData(this.requireContext())
+        infoGetData=true
 
         auth=Firebase.auth
         val user=auth.currentUser
 
         binding.recyclerFeedFragment.layoutManager=LinearLayoutManager(this.requireContext())
         adapterSoru= RecyclerSoruAdapter(soruList!!,user!!.uid,this)
+
         binding.recyclerFeedFragment.adapter=adapterSoru
 
         createMenu()

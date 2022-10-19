@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton.ADMIN_UID
 import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.view.FeedFragmentDirections
 import com.caneryildirim.sorunupaylasyks.view.SingActivity
@@ -45,7 +46,6 @@ class FeedFragmentViewModel:ViewModel() {
         OneSignal.setNotificationOpenedHandler {
             val action=FeedFragmentDirections.actionFeedFragmentToNotificationFragment()
             Navigation.findNavController(view).navigate(action)
-
         }
     }
 
@@ -205,7 +205,7 @@ class FeedFragmentViewModel:ViewModel() {
             bildirimMap.put("date",Timestamp.now())
             bildirimMap.put("docBildirim",uuidBildirim)
 
-            db.collection("Users").document("6A9F9r4CAhM18qHT1JgiuthRGZm2").collection("Bildirimler").document(uuidBildirim).set(bildirimMap)
+            db.collection("Users").document(ADMIN_UID).collection("Bildirimler").document(uuidBildirim).set(bildirimMap)
                 .addOnSuccessListener {
                     Toast.makeText(context,"Şikayet edildi",Toast.LENGTH_SHORT).show()
                     db.collection("Admin").document("6A9F9r4CAhM18qHT1JgiuthRGZm2")

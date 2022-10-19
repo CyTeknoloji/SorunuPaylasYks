@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardOdev"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:cardBackgroundColor="@color/cardviewcolor"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="1dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textAciklamaDetailCevap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="10dp"
+                android:text="Açıklama:"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/imageCevapDetailCevap"
+                app:layout_constraintStart_toStartOf="@+id/textUserNameDetailCevap"
+                app:layout_constraintTop_toBottomOf="@+id/textUserNameDetailCevap" />
+
+            <ImageView
+                android:id="@+id/imageCevapDetailCevap"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintDimensionRatio=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textAciklamaDetailCevap"
+                tools:srcCompat="@drawable/cevapmedia" />
+
+            <TextView
+                android:id="@+id/textUserNameDetailCevap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="userName:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tarihCevapText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dogruCevapText" />
+
+            <ImageView
+                android:id="@+id/menuRecyclerCevap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/noktauc" />
+
+            <ImageView
+                android:id="@+id/dogruCevap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/dogruCevapText"
+                app:layout_constraintStart_toEndOf="@+id/dogruCevapText"
+                app:layout_constraintTop_toTopOf="@+id/dogruCevapText"
+                app:srcCompat="@drawable/dogrucevap" />
+
+            <TextView
+                android:id="@+id/dogruCevapText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="5dp"
+                android:text="Doğru Cevap"
+                android:textColor="#41EF41"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dogruCevapmiSorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:text="Cevap doğru mu?"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageCevapDetailCevap" />
+
+            <TextView
+                android:id="@+id/evetDogruText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Evet"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/dogruCevapmiSorText"
+                app:layout_constraintTop_toBottomOf="@+id/dogruCevapmiSorText" />
+
+            <TextView
+                android:id="@+id/hayirYanlisText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Hayır"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/evetDogruText"
+                app:layout_constraintTop_toTopOf="@+id/evetDogruText" />
+
+            <TextView
+                android:id="@+id/tarihCevapText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="Tarih:"
+                app:layout_constraintBottom_toBottomOf="@+id/menuRecyclerCevap"
+                app:layout_constraintEnd_toStartOf="@+id/menuRecyclerCevap"
+                app:layout_constraintTop_toTopOf="@+id/menuRecyclerCevap" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

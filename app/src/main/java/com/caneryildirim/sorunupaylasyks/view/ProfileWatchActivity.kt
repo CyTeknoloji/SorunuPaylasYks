@@ -23,6 +23,8 @@ class ProfileWatchActivity : AppCompatActivity(),RecyclerSoruAdapter.Delete {
     private lateinit var viewModel:ProfileWatchViewModel
     private var adapterSoru:RecyclerSoruAdapter?=null
     private var soruList:ArrayList<Soru>?= arrayListOf()
+    private lateinit var userName:String
+    private lateinit var userPhotoUrl:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,8 @@ class ProfileWatchActivity : AppCompatActivity(),RecyclerSoruAdapter.Delete {
 
         val intent=intent
         val userUid=intent.getStringExtra("userUid")
+        userName= intent.getStringExtra("userName").toString()
+        userPhotoUrl=intent.getStringExtra("userPhotoUrl").toString()
 
         observeLiveData()
 
@@ -58,10 +62,17 @@ class ProfileWatchActivity : AppCompatActivity(),RecyclerSoruAdapter.Delete {
     private fun observeLiveData() {
         viewModel.soruListLive.observe(this, Observer {
             it?.let {
-                binding.recyclerProfileWatch.visibility=View.VISIBLE
-                adapterSoru?.updateSoruList(it)
-                binding.userNameProfileWatch.text=it[0].userDisplayName
-                binding.userPhotoProfileWatch.downloadUrlPicassoProfil(it[0].userPhotoUrl)
+                if (it.size>0){
+                    binding.recyclerProfileWatch.visibility=View.VISIBLE
+                    adapterSoru?.updateSoruList(it)
+                    binding.userNameProfileWatch.text=userName
+                    binding.userPhotoProfileWatch.downloadUrlPicassoProfil(userPhotoUrl)
+                    binding.textViewSoruYok.visibility=View.GONE
+                }else{
+                    binding.userNameProfileWatch.text=userName
+                    binding.userPhotoProfileWatch.downloadUrlPicassoProfil(userPhotoUrl)
+                    binding.textViewSoruYok.visibility=View.VISIBLE
+                }
             }
         })
 
@@ -70,6 +81,7 @@ class ProfileWatchActivity : AppCompatActivity(),RecyclerSoruAdapter.Delete {
                 binding.progressProfileWatch.visibility= View.VISIBLE
                 binding.textErrorProfileWatch.visibility=View.GONE
                 binding.recyclerProfileWatch.visibility=View.GONE
+                binding.textViewSoruYok.visibility=View.GONE
             }else{
                 binding.progressProfileWatch.visibility= View.GONE
                 binding.textErrorProfileWatch.visibility=View.GONE

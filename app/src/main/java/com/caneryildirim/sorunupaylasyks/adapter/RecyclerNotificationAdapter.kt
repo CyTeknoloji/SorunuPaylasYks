@@ -33,7 +33,7 @@ class RecyclerNotificationAdapter(val notificationList:ArrayList<Notification>,v
         dateSettings(position,holder)
 
         val dolu=holder.itemView.context.getColor(R.color.purple_700)
-        val bos=holder.itemView.context.getColor(R.color.white)
+        val bos=holder.itemView.context.getColor(R.color.spinnercolor)
 
         if (notificationList[position].okundu==false || notificationList[position].okundu==null){
             holder.binding.cardNotification.setCardBackgroundColor(dolu)

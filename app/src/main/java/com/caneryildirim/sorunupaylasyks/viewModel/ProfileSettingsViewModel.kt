@@ -6,15 +6,21 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
+import com.caneryildirim.sorunupaylasyks.view.FeedFragmentDirections
+import com.caneryildirim.sorunupaylasyks.view.ProfileSettingsFragmentDirections
 import com.caneryildirim.sorunupaylasyks.view.SingActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.onesignal.OneSignal
 
 class ProfileSettingsViewModel:ViewModel() {
     val auth= Firebase.auth
@@ -22,6 +28,16 @@ class ProfileSettingsViewModel:ViewModel() {
     val userNameList=ArrayList<String>()
     var userNames=MutableLiveData<List<String>>()
     var loadingUserName=MutableLiveData<Boolean>(false)
+
+    fun controlNotification(context: Context,view: View){
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+        OneSignal.initWithContext(context)
+        OneSignal.setAppId(Singleton.ONESIGNAL_APP_ID)
+        OneSignal.setNotificationOpenedHandler {
+            val action= ProfileSettingsFragmentDirections.actionProfileSettingsFragmentToNotificationFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+    }
 
     fun signOut(context: Context, activity: Activity){
         auth.signOut()

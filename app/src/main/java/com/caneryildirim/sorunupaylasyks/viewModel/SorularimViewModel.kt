@@ -4,17 +4,23 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation
+import com.caneryildirim.sorunupaylasyks.singleton.Singleton
 import com.caneryildirim.sorunupaylasyks.util.Soru
+import com.caneryildirim.sorunupaylasyks.view.FeedFragmentDirections
 import com.caneryildirim.sorunupaylasyks.view.SingActivity
+import com.caneryildirim.sorunupaylasyks.view.SorularimFragmentDirections
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.onesignal.OneSignal
 
 class SorularimViewModel:ViewModel() {
     val loadingFeedLive= MutableLiveData<Boolean>(false)
@@ -24,6 +30,16 @@ class SorularimViewModel:ViewModel() {
     val db= Firebase.firestore
     val storage= Firebase.storage
     val soruArrayList=ArrayList<Soru>()
+
+    fun controlNotification(context: Context,view: View){
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
+        OneSignal.initWithContext(context)
+        OneSignal.setAppId(Singleton.ONESIGNAL_APP_ID)
+        OneSignal.setNotificationOpenedHandler {
+            val action= SorularimFragmentDirections.actionSorularimFragmentToNotificationFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+    }
 
     fun refreshData(context:Context){
         loadingFeedLive.value=true
@@ -98,7 +114,6 @@ class SorularimViewModel:ViewModel() {
             Toast.makeText(context,"Beklenmedik bir hata oluştu!",Toast.LENGTH_SHORT).show()
         }
     }
-
 
     fun signOut(context: Context,activity: Activity){
         auth.signOut()

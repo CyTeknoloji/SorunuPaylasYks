@@ -49,6 +49,8 @@ class SorularimFragment : Fragment(),RecyclerSoruAdapter.Delete {
 
         viewModel.refreshData(this.requireContext())
 
+        viewModel.controlNotification(this.requireContext(),this.requireView())
+
         auth= Firebase.auth
         val user=auth.currentUser
 
