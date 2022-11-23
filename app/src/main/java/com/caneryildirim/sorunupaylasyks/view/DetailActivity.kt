@@ -69,7 +69,6 @@ class DetailActivity : AppCompatActivity(),RecyclerCevapAdapter.Delete {
         override fun createIntent(context: Context, input: Uri?): Intent {
             return CropImage.activity(input)
                 .setCropMenuCropButtonTitle("Kırp")
-                .setAspectRatio(1,1)
                 .setRequestedSize(600,600)
                 .getIntent(context)
         }

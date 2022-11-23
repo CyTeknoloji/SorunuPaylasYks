@@ -98,8 +98,8 @@ class DetailViewModel:ViewModel() {
         }
     }
 
-    fun getRecyclerData(soruUid:String){
-            val reference=db.collection("Cevap").document(soruUid)
+    fun getRecyclerData(soruUidForFb:String){
+            val reference=db.collection("Cevap").document(soruUidForFb)
                 .collection("Cevaplar")
                 .orderBy("date", Query.Direction.ASCENDING)
             referenceRegistration= reference.addSnapshotListener { value, error ->
@@ -125,7 +125,7 @@ class DetailViewModel:ViewModel() {
                             val cevap=Cevap(downloadUrl,selectedAciklama,soruUid,userName,userUid,userUidSoru,docUuid,dogruCevap,pIdCevap,userPhotoUrl,date,yanlisCevap)
                             cevapArrayList.add(cevap)
 
-                            if (pIdCevap!=null && userUid!= userUid){
+                            if (pIdCevap!=null && userUid!= userUidSoru){
                                 val takipci= Takipci(userUid,pIdCevap)
                                 takipciList.add(takipci)
                             }
