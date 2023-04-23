@@ -33,6 +33,8 @@ import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoProfil
 import com.caneryildirim.sorunupaylasyks.util.downloadUrlPicassoSoru
 import com.caneryildirim.sorunupaylasyks.viewModel.DetailViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
@@ -89,12 +91,11 @@ class DetailActivity : AppCompatActivity(),RecyclerCevapAdapter.Delete {
 
         adMobView()
 
-        binding.toolbarDetailLast.title="Soru Detayları"
-        binding.toolbarDetailLast.setTitleTextColor(getColor(R.color.white))
-        setSupportActionBar(binding.toolbarDetailLast)
-        binding.toolbarDetailLast.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+
 
         viewModel=ViewModelProvider(this).get(DetailViewModel::class.java)
 

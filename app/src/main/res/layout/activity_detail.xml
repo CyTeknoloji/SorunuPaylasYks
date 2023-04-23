@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarDetailLast"
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8642310051732821/8630226146"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/backbutton" />
+        app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollViewLast"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarDetailLast">
+        app:layout_constraintTop_toBottomOf="@+id/adView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

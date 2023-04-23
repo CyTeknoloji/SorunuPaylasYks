@@ -17,6 +17,8 @@ import com.caneryildirim.sorunupaylasyks.singleton.Singleton
 import com.caneryildirim.sorunupaylasyks.singleton.Singleton.notificationInfo
 import com.caneryildirim.sorunupaylasyks.util.Soru
 import com.caneryildirim.sorunupaylasyks.viewModel.FeedFragmentViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -74,6 +76,10 @@ class FeedFragment : Fragment(),RecyclerSoruAdapter.Delete {
 
         viewModel.refreshData(this.requireContext())
         infoGetData=true
+
+        MobileAds.initialize(this.requireContext()) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         auth=Firebase.auth
         val user=auth.currentUser
